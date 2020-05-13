@@ -10,8 +10,6 @@ mongoose.connect('mongodb://localhost/urlShortner', {
     useNewUrlParser: true, useUnifiedTopology: true
 })
 
-
-
 app.get('/', async(req, res) => {
     const shortUrls = await shortUrl.find()
     res.render('index', { shortUrls: shortUrls })
@@ -30,7 +28,5 @@ app.get('/:shortUrl', async(req, res) => {
     short.save()
     res.redirect(short.full)
 })
-
-
 
 app.listen(process.env.PORT || 5000)
