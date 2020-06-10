@@ -30,8 +30,8 @@
                   <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
                   <td><%= shortUrl.clicks %></td>
                   <td><form method="POST" action="/shortUrls/<%= shortUrl.id %>?_method=DELETE">
-                    <button type="submit" class="btn-danger" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="submit" class="btn-danger">
+                        <span>&times;</span>
                       </button>
                   </form></td>
                 </tr>
