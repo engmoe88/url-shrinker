@@ -1,15 +1,17 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const shortUrl = require('./models/shortUrl')
 const methodOverride = require('method-override')
 
-
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride('_method'))
 
-mongoose.connect('mongodb://localhost/urlShortner', {
+mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true, useUnifiedTopology: true
 })
 
