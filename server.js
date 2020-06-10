@@ -2,9 +2,12 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const shortUrl = require('./models/shortUrl')
+const methodOverride = require('method-override')
+
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
+app.use(methodOverride('_method'))
 
 mongoose.connect('mongodb://localhost/urlShortner', {
     useNewUrlParser: true, useUnifiedTopology: true
@@ -18,6 +21,17 @@ app.get('/', async(req, res) => {
 app.post('/shortUrls', async(req, res) => {
     await shortUrl.create({ full: req.body.fullUrl })
     res.redirect('/')
+})
+
+app.delete('/shortUrls/:id', async(req, res) => {
+    let urlToDelete
+    try {
+          urlToDelete = await shortUrl.findById(req.params.id)
+          await urlToDelete.remove()
+          res.redirect('/')
+    } catch (error) {
+        res.sendStatus(404)
+    }
 })
 
 app.get('/:shortUrl', async(req, res) => {
