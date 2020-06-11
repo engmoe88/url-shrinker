@@ -32,7 +32,7 @@ app.delete('/shortUrls/:id', async(req, res) => {
           await urlToDelete.remove()
           res.redirect('/')
     } catch (error) {
-        res.sendStatus(404)
+        res.redirect('/')
     }
 })
 
